@@ -209,10 +209,10 @@ const UpcomingEvents = () => {
                   <Button
                     variant="hero-primary"
                     size="sm"
-                    onClick={() => window.open('https://docs.google.com/forms/d/e/1FAIpQLSe1ZYI-Google-Form-ID-Here/viewform', '_blank')}
+                    onClick={() => window.open('https://forms.gle/QTnqyF6hj3JE2fV27', '_blank')}
                     className="flex-1"
                   >
-                    Register Now / Pay
+                    Register Now
                   </Button>
                 )}
               </div>

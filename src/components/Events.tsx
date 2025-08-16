@@ -152,6 +152,7 @@ const Events = () => {
                 <Button 
                   variant={event.featured ? "hero-primary" : "outline"}
                   className="w-full group-hover:scale-105 transition-transform"
+                  onClick={() => window.open('https://forms.gle/QTnqyF6hj3JE2fV27', '_blank')}
                 >
                   Register Now
                   <ArrowRight className="ml-2 w-4 h-4" />
