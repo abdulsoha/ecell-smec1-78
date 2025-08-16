@@ -120,7 +120,7 @@ const Footer = () => {
 
 
           {/* Contact Info */}
-          <div>
+          <div id="contact">
             <h4 className="text-foreground font-semibold mb-6">Contact Info</h4>
             <div className="space-y-4">
               <a
