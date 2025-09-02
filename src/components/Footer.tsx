@@ -66,7 +66,7 @@ const Footer = () => {
                 <img 
                   src="/lovable-uploads/f344ed9a-e937-4b1d-b40e-185cf3f9437d.png" 
                   alt="E-Cell SMEC Logo" 
-                  className="w-8 h-8"
+                  className="w-8 h-8 rounded-full"
                 />
                 <h3 className="text-2xl font-bold text-primary">E-Cell SMEC</h3>
               </div>

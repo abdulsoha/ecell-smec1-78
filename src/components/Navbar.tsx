@@ -51,7 +51,7 @@ const Navbar = () => {
               <img 
                 src="/lovable-uploads/f344ed9a-e937-4b1d-b40e-185cf3f9437d.png" 
                 alt="E-Cell SMEC Logo" 
-                className="w-8 h-8"
+                className="w-8 h-8 rounded-full"
               />
               <span>E-Cell SMEC</span>
             </a>
