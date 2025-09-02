@@ -33,6 +33,39 @@ const UpcomingEvents = () => {
     return () => observer.disconnect();
   }, []);
 
+  // Helper function to get event status based on current date
+  const getEventStatus = (monthYear: string) => {
+    const currentDate = new Date();
+    const currentMonth = currentDate.getMonth(); // 0-11
+    const currentYear = currentDate.getFullYear();
+    
+    // Parse the event month/year
+    const [eventMonthName, eventYearStr] = monthYear.split(' ');
+    const eventYear = parseInt(eventYearStr);
+    const eventMonth = new Date(`${eventMonthName} 1, ${eventYear}`).getMonth();
+    
+    if (eventYear < currentYear || (eventYear === currentYear && eventMonth < currentMonth)) {
+      return { status: 'Completed', className: 'bg-gray-100 text-gray-700', showRegister: false };
+    } else if (eventYear === currentYear && eventMonth === currentMonth) {
+      return { status: 'Ongoing', className: 'bg-green-100 text-green-700', showRegister: true };
+    } else {
+      // Future month - find the next upcoming month to show register button
+      const nextUpcomingMonthIndex = events.findIndex(event => {
+        const [monthName, yearStr] = event.month.split(' ');
+        const year = parseInt(yearStr);
+        const month = new Date(`${monthName} 1, ${year}`).getMonth();
+        return year > currentYear || (year === currentYear && month >= currentMonth);
+      });
+      
+      const isNextUpcoming = events.findIndex(e => e.month === monthYear) === nextUpcomingMonthIndex;
+      return { 
+        status: 'Coming Soon', 
+        className: 'bg-orange-100 text-orange-700', 
+        showRegister: isNextUpcoming 
+      };
+    }
+  };
+
   const events = [
     {
       month: "AUGUST 2025",
@@ -178,15 +211,9 @@ const UpcomingEvents = () => {
                     </div>
                   </div>
                   <div className="ml-3 flex-shrink-0">
-                    {index === 0 ? (
-                      <span className="px-2 sm:px-3 py-1 bg-green-100 text-green-700 rounded-full text-xs font-medium whitespace-nowrap">
-                        Ongoing
-                      </span>
-                    ) : (
-                      <span className="px-2 sm:px-3 py-1 bg-orange-100 text-orange-700 rounded-full text-xs font-medium whitespace-nowrap">
-                        Coming Soon
-                      </span>
-                    )}
+                    <span className={`px-2 sm:px-3 py-1 rounded-full text-xs font-medium whitespace-nowrap ${getEventStatus(event.month).className}`}>
+                      {getEventStatus(event.month).status}
+                    </span>
                   </div>
                 </div>
               </div>
@@ -205,7 +232,7 @@ const UpcomingEvents = () => {
                     <ChevronDown className="ml-2 w-4 h-4" />
                   )}
                 </Button>
-                {index === 0 && (
+                {getEventStatus(event.month).showRegister && (
                   <Button
                     variant="hero-primary"
                     size="sm"
